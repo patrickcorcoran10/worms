@@ -80,11 +80,11 @@
 
         this.eat = function (position) {
           var d = dist(this.x, this.y, position.x, position.y);
+
           if (d < 1) {
             this.total++;
             score++;
             document.getElementById("score").innerHTML = score;
-            console.log(score);
             return true;
           } else {
             return false;
@@ -96,9 +96,10 @@
             var position = this.tail[i];
             var distance = dist(this.x, this.y, position.x, position.y);
             if (distance < 1) {
-              alert("You Got Got Pal. Your score was " + score);
               this.total = 0;
               this.tail = [];
+              alert("You Got Got Pal. Your score was " + score);
+              location.reload();
             }
           }
         };

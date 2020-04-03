@@ -11,6 +11,6 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log("We Got Worms on PORT", PORT);
 });
