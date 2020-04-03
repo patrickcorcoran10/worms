@@ -17,11 +17,13 @@
   </head>
   <body>
     <p>Worms Game</p>
+    <p>Score:<span id="score"></span></p>
     <!-- <script src="./worms.js" async defer></script> -->
     <script>
       var s;
       var scl = 20;
       var food;
+      var score = 0;
 
       function setup() {
         createCanvas(400, 400);
@@ -71,34 +73,37 @@
         this.total = 0;
         this.tail = [];
 
-        this.direction = function(x, y) {
+        this.direction = function (x, y) {
           this.xspeed = x;
           this.yspeed = y;
         };
 
-        this.eat = function(position) {
+        this.eat = function (position) {
           var d = dist(this.x, this.y, position.x, position.y);
           if (d < 1) {
             this.total++;
+            score++;
+            document.getElementById("score").innerHTML = score;
+            console.log(score);
             return true;
           } else {
             return false;
           }
         };
 
-        this.death = function() {
+        this.death = function () {
           for (var i = 0; i < this.tail.length; i++) {
             var position = this.tail[i];
             var distance = dist(this.x, this.y, position.x, position.y);
             if (distance < 1) {
-              alert("You Got Got Pal");
+              alert("You Got Got Pal. Your score was " + score);
               this.total = 0;
               this.tail = [];
             }
           }
         };
 
-        this.update = function() {
+        this.update = function () {
           if (this.total === this.tail.length) {
             for (var i = 0; i < this.tail.length - 1; i++) {
               this.tail[i] = this.tail[i + 1];
@@ -113,7 +118,7 @@
           this.y = constrain(this.y, 0, height - scl);
         };
 
-        this.show = function() {
+        this.show = function () {
           fill(255);
           for (var i = 0; i < this.total; i++) {
             rect(this.tail[i].x, this.tail[i].y, scl, scl);
