@@ -1,0 +1,25 @@
+{
+  "name": "worms",
+  "version": "1.0.0",
+  "description": "Worm Game with p5.js",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patrickcorcoran10/worms.git"
+  },
+  "author": "pc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/patrickcorcoran10/worms/issues"
+  },
+  "homepage": "https://github.com/patrickcorcoran10/worms#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "p5": "^1.0.0",
+    "path": "^0.12.7"
+  }
+}
