@@ -7,6 +7,12 @@
     <title></title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
 
     <link
       href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap"
@@ -16,21 +22,32 @@
     <script src="sketch.js"></script>
   </head>
   <body>
-    <div class="score">
-      <p style="font-family: 'Patrick Hand'; font-size: 30px;">Worms Game</p>
-      <p style="font-family: 'Patrick Hand'; font-size: 30px;">
-        Score:
-        <span
-          id="score"
-          style="font-family: 'Patrick Hand'; font-size: 30px;"
-        ></span>
-      </p>
-    </div>
-    <div>
-      <p style="font-family: 'Patrick Hand';">
-        (Use the arrow keys on you're keyboard to guide the worm to it's food.
-        Try to get a high score!)
-      </p>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <div class="score">
+            <p style="font-family: 'Patrick Hand'; font-size: 30px;">
+              Worms Game
+            </p>
+            <p style="font-family: 'Patrick Hand'; font-size: 30px;">
+              Score:
+              <span
+                id="score"
+                style="font-family: 'Patrick Hand'; font-size: 30px;"
+              ></span>
+            </p>
+          </div>
+          <div>
+            <p style="font-family: 'Patrick Hand';">
+              (Use the arrow keys on you're keyboard to guide the worm to it's
+              food. Try to get a high score!)
+            </p>
+          </div>
+          <div id="sketch-holder"></div>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
     </div>
     <script>
       var s;
@@ -39,7 +56,8 @@
       var score = 0;
 
       function setup() {
-        createCanvas(400, 400);
+        canvas = createCanvas(400, 400);
+        canvas.parent("sketch-holder");
         s = new Worm();
         frameRate(10);
         pickLocation();
