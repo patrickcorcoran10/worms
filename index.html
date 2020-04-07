@@ -1,27 +1,18 @@
 <!DOCTYPE html>
-
-<html class="no-js">
+<html>
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Worm Game</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.min.js"
-      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-      crossorigin="anonymous"
-    ></script>
-
     <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     />
-
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap"
       rel="stylesheet"
@@ -104,6 +95,36 @@
         </div>
         <div class="col-md-2"></div>
       </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div id="myModal" class="modal fade">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">You Died!</h5>
+                  <button type="button" class="close" data-dismiss="modal">
+                    &times;
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form id="form">
+                    <p>
+                      Add a name to that score:
+                    </p>
+
+                    <input id="name" />
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary" id="submit">
+                    Update Leaderboard
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <script>
       var s;
@@ -116,10 +137,8 @@
       var form = $("#form");
 
       $(document).ready(() => {
-        console.log("we're on the page");
-        $.get("/api/get-scores", function (data) {
+        jQuery.get("/api/get-scores", function (data) {
           data.sort((a, b) => (b.score > a.score ? 1 : -1));
-          console.log("descending", data);
           let sortedArr = [];
           let listItem = "";
           for (let i = 0; i <= 9; i++) {
@@ -207,30 +226,20 @@
             if (distance < 1) {
               this.total = 0;
               this.tail = [];
-
-              // $("#myModal").modal("show");
-              // $(window).on("load", function () {
-              //   $("#myModal").modal("show");
-              // });
-              alert("You Got Got Pal. Your score was " + score);
-              player = { name: "pat", score: score };
-              console.log(player);
-              $.post("/api/input-score", player, function () {});
-
-              // this.submit();
-              location.reload();
+              $("#myModal").modal("show");
+              this.submit();
             }
           }
         };
 
         this.submit = function () {
-          console.log("hellow");
-          $(form).on("submit", function handleSubmit(e) {
+          $(form).on("#submit", function handleSubmit(e) {
             e.preventDefault();
             console.log("we clicked");
-            player = { name: "pat", score: score };
+            player = { name: nameInput.val().trim(), score: score };
             console.log(player);
             $.post("/api/input-score", player, function () {});
+            location.reload();
           });
         };
 
