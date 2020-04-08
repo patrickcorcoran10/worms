@@ -157,6 +157,11 @@
         s = new Worm();
         frameRate(10);
         pickLocation();
+        function startGame() {
+          if (keyCode === RETURN) {
+            console.log("start the races");
+          }
+        }
       }
 
       function pickLocation() {
@@ -193,10 +198,10 @@
       }
 
       function Worm() {
-        this.x = 0;
-        this.y = 0;
-        this.xspeed = 1;
-        this.yspeed = 0;
+        this.x = width / 2;
+        this.y = height / 2;
+        this.xspeed = 0;
+        this.yspeed = -1;
         this.total = 0;
         this.tail = [];
 
